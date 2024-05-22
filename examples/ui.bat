@@ -1,0 +1,1 @@
+py ../src/appserver.py ui.html

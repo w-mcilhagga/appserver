@@ -1,0 +1,28 @@
+<script src="@api.js"></script>
+<h1>test of read</h1>
+<script type="module">
+    let response = await api.readtext(
+        'C:\\GDrive\\Python projects\\appserver\\examples\\read.html'
+    )
+    console.log(response)
+
+    response = await api.readbinary('favicon.ico')
+    console.log((await response.arrayBuffer()).length)
+
+    try {
+        response = await api.readtext(
+            'C:\\GDrive\\Python projects\\appserver\\nonexistent.html'
+        )
+    } catch (e) {
+        console.log('exception', e)
+    }
+
+    response = await api.readfolder('.')
+    console.log(response)
+
+    let t = performance.now()
+    response = await api.getstats('.\\read.html')
+    console.log(performance.now() - t, response)
+
+    window.addEventListener('beforeunload', () => api.exit())
+</script>

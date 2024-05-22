@@ -1,0 +1,38 @@
+<script src="@api.js"></script>
+<h1>test of ui</h1>
+<button id="open">open</button>
+<button id="openfolder">open folder</button>
+<button id="save">save</button>
+<script type="module">
+    document.querySelector('#open').onclick = async () => {
+        let response = await api.chooseopenfile({
+            title: 'Open file',
+            filetypes: [
+                ['HTML', '*.html'],
+                ['All', '*.*'],
+            ],
+        })
+        console.log(response)
+    }
+
+    document.querySelector('#save').onclick = async () => {
+        let response = await api.choosesavefile({
+            title: 'Save file',
+            initialfile: 'saveme.txt',
+            filetypes: [
+                ['Text', '*.txt'],
+                ['All', '*.*'],
+            ],
+        })
+        console.log(response)
+    }
+
+    document.querySelector('#openfolder').onclick = async () => {
+        let response = await api.choosefolder({
+            title: 'Open folder',
+        })
+        console.log(response)
+    }
+
+    window.addEventListener('beforeunload', () => api.exit())
+</script>

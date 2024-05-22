@@ -1,0 +1,31 @@
+<script src="@api.js"></script>
+<h1>test of write</h1>
+<script type="module">
+    let response = await api.writefile(
+        'C:\\GDrive\\Python projects\\appserver\\examples\\testfile.txt',
+        'this is the\n file'
+    )
+    console.log(response)
+
+    // absolute & relative paths (relative to the location of this file) are just fine
+    response = await api.copyfile(
+        {
+            src: 'C:\\GDrive\\Python projects\\appserver\\examples\\testfile.txt',
+            dest: 'testfile2.txt',
+        },
+        {
+            src: 'C:\\GDrive\\Python projects\\appserver\\examples\\testfile.txt',
+            dest: 'testfile3.txt',
+        }
+    )
+
+    response = await api.deletefile(
+        'C:\\GDrive\\Python projects\\appserver\\examples\\testfile.txt',
+        'C:\\GDrive\\Python projects\\appserver\\examples\\testfile2.txt'
+    )
+    console.log(response)
+
+    // window closes before exit executed, because it works when window
+    // stays open.
+    window.addEventListener('beforeunload', async () => await api.exit())
+</script>

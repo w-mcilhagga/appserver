@@ -1,0 +1,5 @@
+1. get mkcert (download for windows & rename)
+2. command window
+3. mkcert -install (may need admin)
+4. mkcert localhost (creates localhost-key.pem, localhost.pem)
+5. devserver.py
